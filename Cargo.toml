@@ -8,6 +8,7 @@ askama = "0.13.1"
 axum = "0.8.3" 
 mime = "0.3.17"
 tokio = { version = "1.44.2", features = ["full"] }
+axum-extra = "0.10.1"
 
 [dependencies.tower-http]
 version = "0.6.2"

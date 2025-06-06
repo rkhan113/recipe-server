@@ -1,0 +1,18 @@
+<!-- Basic HTML template for Askama -->
+<html>
+  <head>
+    <title>Recipe Server</title>
+    <!-- Link to stylesheet passed in from Askama template -->
+    <link rel="stylesheet" href="{{stylesheet}}">
+  </head>
+  <body>
+    <h1>Recipe</h1>
+
+    <!-- Recipe section -->
+    <div class="recipe">
+        <span class="teller">{{recipe.name}}</span><br/>
+        <p class="tellee">{{recipe.ingredients}}</p><br/>
+        <p class="teller">{{recipe.instructions}}</p>
+    </div>
+  </body>
+</html>

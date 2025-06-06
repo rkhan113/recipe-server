@@ -1,56 +1,53 @@
-use axum::{self, response, routing}; // brings in Axum components to return raw HTML content & set up GET routes
-use tokio::net; // brings in TCPListener - binds to IP + port for our server
+// Bring in required crates
+use axum::{self, response, routing};
+use tokio::net;
+use tower_http::services;
+use axum_extra::response as extra_response;
 
-// will be hardcoding some test data for now
-struct Recipe {
-    name: &'static str,
-    ingreds: &'static str, // ingredients
-    instrucs: &'static str, // instructions
+// Bring in our local modules
+mod recipe;
+mod templates;
+
+use recipe::*;
+use templates::*;
+
+// Route handler for the index page
+async fn get_recipe() -> response::Html<String> {
+    // Create the template with the example recipe
+    let template = IndexTemplate::new(&THE_RECIPE);
+    // Render it to a String and wrap it in Html response
+    response::Html(template.render().unwrap())
 }
 
-// this is the actual data
-const THE_RECIPE: Recipe = Recipe {
-    name: "Jelly Sandwich",
-    ingreds: "Bread, Jelly",
-    instrucs: "1. Spread any type of fruit jelly generously on the a slice of bread. \n2. Put another slice of bread on top of the slice with jelly. \n3. Enjoy!",  
-};
-
-// function to render
-fn render_recipe(recipe: &Recipe) -> String{
-    format!(
-        r#"<h1>{}</h1>
-        <h2>Ingredients</h2>
-        <p>{}</p>
-        <h2>Instructions</h2>
-        <p>{}</p>"#,
-        recipe.name,
-        recipe.ingreds,
-        recipe.instrucs
-    )
+// Route handler for serving the CSS file
+async fn get_css() -> extra_response::Css<&'static str> {
+    extra_response::Css(r#".recipe { font-weight: bold; }"#)
 }
 
-// route handler
-async fn hello() -> response::Html<String>{
-    let recipe_html = render_recipe(&THE_RECIPE); // generate HTML string form recipe
-    response::Html(format!( // wrap it in an HTML doc
-        r#"<head><title>{}</title></head><body>{}</body>"#,
-        THE_RECIPE.name,
-        recipe_html
-    ))
-}
-
-// sreve function
+// The main server setup
 async fn serve() -> Result<(), Box<dyn std::error::Error>> {
-    let app = axum::Router::new().route("/", routing::get(hello));
+    // Create the router
+    let app = axum::Router::new()
+        .route("/", routing::get(get_recipe)) // Handle index page
+        // Serve static CSS file from disk (not using get_css anymore)
+        .route_service(
+            "/recipe.css",
+            services::ServeFile::new_with_mime("assets/static/recipe.css", &mime::TEXT_CSS),
+        );
+
+    // Bind to localhost on port 3000
     let listener = net::TcpListener::bind("127.0.0.1:3000").await?;
+    // Start the server
     axum::serve(listener, app).await?;
     Ok(())
 }
 
+// Entry point of the app
 #[tokio::main]
-async fn main(){
+async fn main() {
+    // If serve() returns an error, log and exit
     if let Err(err) = serve().await {
-        eprintln!("recipe-server: error: {}", err);
+        eprintln!("Error: {}", err);
         std::process::exit(1);
     }
 }

@@ -1,0 +1,9 @@
+/* Styling for the recipe page */
+.recipe-title {
+  font-weight: bold;
+  font-size: 150%;
+}
+.ingredients, .instructions {
+  font-style: italic;
+  margin-left: 20px;
+}

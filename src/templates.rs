@@ -1,8 +1,8 @@
-// Bring in Askama templating
-use askama::Template;
-
 // Import Recipe struct from recipe.rs
 use crate::recipe::Recipe;
+
+// Bring in Askama templating
+use askama::Template;
 
 // Define a template struct that references index.html
 #[derive(Template)]

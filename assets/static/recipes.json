@@ -1,0 +1,996 @@
+[
+  {
+    "id": "chinese_garlic_chicken",
+    "name": "Garlic Chicken Stir-Fry",
+    "ingredients": [
+      "2 chicken breasts, sliced thin",
+      "3 cloves garlic, minced",
+      "1 bell pepper, sliced",
+      "1 cup broccoli florets",
+      "2 tbsp soy sauce",
+      "1 tbsp oyster sauce",
+      "1 tbsp vegetable oil",
+      "1 tsp cornstarch",
+      "1/4 cup water"
+    ],
+    "instructions": "Heat oil in a pan, add garlic and chicken and stir-fry until cooked. Add bell pepper and broccoli, stir for 2-3 minutes. Mix cornstarch with water and soy sauce, pour over chicken and veggies. Add oyster sauce, stir until sauce thickens. Serve hot with steamed rice.",
+    "tags": ["chinese", "chicken", "quick", "dinner"],
+    "source": "https://www.thewoksoflife.com/garlic-chicken/"
+  },
+  {
+    "id": "pakistani_chicken_biryani_quick",
+    "name": "Quick Chicken Biryani",
+    "ingredients": [
+      "1 cup basmati rice",
+      "250g chicken pieces",
+      "1 onion, sliced",
+      "1 tomato, chopped",
+      "1/2 cup yogurt",
+      "1 tbsp biryani masala",
+      "1 tsp ginger garlic paste",
+      "2 tbsp oil",
+      "Salt to taste"
+    ],
+    "instructions": "Wash and soak rice for 15 minutes. In a pan, heat oil, fry onions until golden. Add ginger garlic paste, chicken, and cook until half done. Add tomatoes, yogurt, biryani masala, salt, and cook until chicken is tender. Layer rice on top, cover tightly and cook on low heat for 15 minutes. Serve with raita.",
+    "tags": ["pakistani", "chicken", "rice", "dinner"],
+    "source": "https://www.tasteofpakistan.com/chicken-biryani/"
+  },
+  {
+    "id": "indian_chana_masala",
+    "name": "Chana Masala",
+    "ingredients": [
+      "2 cups cooked chickpeas",
+      "1 onion, chopped",
+      "2 tomatoes, chopped",
+      "2 cloves garlic, minced",
+      "1 tsp ginger, grated",
+      "1 tsp cumin seeds",
+      "1 tsp coriander powder",
+      "1 tsp garam masala",
+      "2 tbsp oil",
+      "Salt to taste",
+      "Fresh coriander for garnish"
+    ],
+    "instructions": "Heat oil in a pan, add cumin seeds and let them splutter. Add onions, garlic, and ginger and sauté until golden. Add tomatoes and cook until soft. Add coriander powder, garam masala, salt, and chickpeas. Add water to desired consistency, simmer for 10 minutes. Garnish with fresh coriander and serve with rice or naan.",
+    "tags": ["indian", "vegetarian", "quick", "dinner"],
+    "source": "https://www.vegrecipesofindia.com/chana-masala-recipe/"
+  },
+  {
+    "id": "mexican_bean_tacos",
+    "name": "Quick Bean Tacos",
+    "ingredients": [
+      "1 can black beans, drained",
+      "1 tsp chili powder",
+      "1/2 tsp cumin",
+      "8 small corn tortillas",
+      "1 cup shredded lettuce",
+      "1/2 cup diced tomatoes",
+      "1/4 cup shredded cheese",
+      "2 tbsp salsa"
+    ],
+    "instructions": "Heat beans with chili powder and cumin until warm. Warm tortillas in a pan. Fill each tortilla with beans, lettuce, tomatoes, cheese, and salsa. Serve immediately.",
+    "tags": ["mexican", "vegetarian", "quick", "lunch"],
+    "source": "https://www.simplyrecipes.com/recipes/bean_tacos/"
+  },
+  {
+    "id": "italian_pasta_primavera",
+    "name": "Pasta Primavera",
+    "ingredients": [
+      "200g pasta",
+      "1 zucchini, sliced",
+      "1 cup cherry tomatoes, halved",
+      "1 bell pepper, sliced",
+      "2 cloves garlic, minced",
+      "2 tbsp olive oil",
+      "1/4 cup grated Parmesan",
+      "Salt and pepper to taste",
+      "Fresh basil for garnish"
+    ],
+    "instructions": "Cook pasta according to package. In a pan, heat olive oil, add garlic and vegetables and sauté until tender. Toss cooked pasta with veggies, season with salt and pepper. Sprinkle Parmesan and basil on top. Serve warm.",
+    "tags": ["italian", "vegetarian", "quick", "dinner"],
+    "source": "https://www.delish.com/cooking/recipe-ideas/a20093817/pasta-primavera-recipe/"
+  },
+  {
+    "id": "mediterranean_greek_salad",
+    "name": "Greek Salad",
+    "ingredients": [
+      "2 cups chopped cucumber",
+      "1 cup cherry tomatoes, halved",
+      "1/2 cup sliced red onion",
+      "1/2 cup Kalamata olives",
+      "1/2 cup feta cheese, crumbled",
+      "2 tbsp olive oil",
+      "1 tbsp red wine vinegar",
+      "1 tsp dried oregano",
+      "Salt and pepper to taste"
+    ],
+    "instructions": "Combine cucumber, tomatoes, onion, olives, and feta in a bowl. Whisk olive oil, vinegar, oregano, salt, and pepper. Pour dressing over salad and toss gently. Serve chilled.",
+    "tags": ["mediterranean", "vegetarian", "salad", "quick"],
+    "source": "https://www.simplyrecipes.com/recipes/greek_salad/"
+  },
+  {
+    "id": "chinese_egg_fried_rice",
+    "name": "Egg Fried Rice",
+    "ingredients": [
+      "2 cups cooked rice (preferably day-old)",
+      "2 eggs, beaten",
+      "1/2 cup peas and carrots",
+      "2 green onions, chopped",
+      "2 tbsp soy sauce",
+      "1 tbsp vegetable oil",
+      "Salt and pepper to taste"
+    ],
+    "instructions": "Heat oil in a pan, scramble eggs and set aside. In the same pan, sauté peas and carrots, add rice and soy sauce. Stir well, add scrambled eggs and green onions. Mix and cook for 2 more minutes. Serve hot.",
+    "tags": ["chinese", "quick", "rice", "dinner"],
+    "source": "https://www.thespruceeats.com/egg-fried-rice-695115"
+  },
+  {
+    "id": "pakistani_aloogobi",
+    "name": "Aloo Gobi (Potato Cauliflower Curry)",
+    "ingredients": [
+      "2 potatoes, diced",
+      "1 small cauliflower, chopped",
+      "1 onion, chopped",
+      "2 tomatoes, chopped",
+      "1 tsp cumin seeds",
+      "1 tsp turmeric",
+      "1 tsp coriander powder",
+      "1/2 tsp red chili powder",
+      "2 tbsp oil",
+      "Salt to taste",
+      "Fresh coriander for garnish"
+    ],
+    "instructions": "Heat oil, add cumin seeds until they splutter. Add onions and sauté until golden. Add tomatoes and spices, cook until oil separates. Add potatoes and cauliflower, mix well, cover and cook until tender. Garnish with coriander and serve hot with roti or rice.",
+    "tags": ["pakistani", "vegetarian", "curry", "dinner"],
+    "source": "https://www.vegrecipesofindia.com/aloo-gobi-recipe/"
+  },
+  {
+    "id": "indian_masoor_dal",
+    "name": "Masoor Dal (Red Lentil Curry)",
+    "ingredients": [
+      "1 cup red lentils (masoor dal)",
+      "1 onion, chopped",
+      "2 tomatoes, chopped",
+      "2 cloves garlic, minced",
+      "1 tsp turmeric",
+      "1 tsp cumin seeds",
+      "1 tsp garam masala",
+      "2 tbsp oil",
+      "Salt to taste",
+      "Fresh coriander for garnish"
+    ],
+    "instructions": "Rinse lentils and cook with turmeric and water until soft. In another pan, heat oil, add cumin seeds, onions, and garlic, sauté until golden. Add tomatoes and garam masala, cook until soft. Mix cooked lentils into the pan, simmer 5 minutes. Garnish and serve with rice or naan.",
+    "tags": ["indian", "vegetarian", "lentils", "quick"],
+    "source": "https://www.indianhealthyrecipes.com/masoor-dal-recipe/"
+  },
+  {
+    "id": "mexican_guacamole",
+    "name": "Simple Guacamole",
+    "ingredients": [
+      "2 ripe avocados",
+      "1/2 small onion, finely chopped",
+      "1 small tomato, diced",
+      "1 tbsp lime juice",
+      "1/4 cup chopped cilantro",
+      "Salt and pepper to taste"
+    ],
+    "instructions": "Mash avocados in a bowl. Add onion, tomato, lime juice, cilantro, salt, and pepper. Mix gently and serve immediately with tortilla chips or as a topping.",
+    "tags": ["mexican", "vegetarian", "snack", "quick"],
+    "source": "https://www.simplyrecipes.com/recipes/perfect_guacamole/"
+  },
+  {
+    "id": "italian_bruschetta",
+    "name": "Tomato Basil Bruschetta",
+    "ingredients": [
+      "1 baguette, sliced",
+      "2 cups diced tomatoes",
+      "1/4 cup chopped fresh basil",
+      "2 cloves garlic, minced",
+      "2 tbsp olive oil",
+      "Salt and pepper to taste"
+    ],
+    "instructions": "Toast baguette slices until golden. Mix tomatoes, basil, garlic, olive oil, salt, and pepper in a bowl. Spoon mixture on toasted bread and serve immediately.",
+    "tags": ["italian", "vegetarian", "appetizer", "quick"],
+    "source": "https://www.simplyrecipes.com/recipes/bruschetta_with_tomato_and_basil/"
+  },
+  {
+    "id": "mediterranean_hummus",
+    "name": "Classic Hummus",
+    "ingredients": [
+      "1 can chickpeas, drained",
+      "2 tbsp tahini",
+      "2 tbsp olive oil",
+      "1 clove garlic",
+      "1 tbsp lemon juice",
+      "Salt to taste",
+      "Water as needed"
+    ],
+    "instructions": "Blend chickpeas, tahini, olive oil, garlic, lemon juice, and salt until smooth. Add water gradually to reach desired consistency. Serve with pita bread or veggies.",
+    "tags": ["mediterranean", "vegetarian", "dip", "quick"],
+    "source": "https://www.simplyrecipes.com/recipes/hummus/"
+  },
+  {
+    "id": "chinese_hot_and_sour_soup",
+    "name": "Hot and Sour Soup",
+    "ingredients": [
+      "4 cups chicken broth",
+      "100g tofu, cubed",
+      "1/2 cup sliced mushrooms",
+      "2 tbsp soy sauce",
+      "1 tbsp rice vinegar",
+      "1 tsp chili paste",
+      "1 egg, beaten",
+      "1 tbsp cornstarch mixed with 2 tbsp water",
+      "2 green onions, chopped",
+      "Salt and pepper to taste"
+    ],
+    "instructions": "Bring broth to boil, add mushrooms and tofu. Mix soy sauce, vinegar, and chili paste, add to pot. Slowly pour in cornstarch slurry to thicken. Drizzle in beaten egg while stirring. Garnish with green onions and serve hot.",
+    "tags": ["chinese", "soup", "quick", "dinner"],
+    "source": "https://www.thespruceeats.com/hot-and-sour-soup-694707"
+  },
+  {
+    "id": "pakistani_saag",
+    "name": "Saag (Spinach Curry)",
+    "ingredients": [
+      "4 cups spinach, chopped",
+      "1 onion, chopped",
+      "2 tomatoes, chopped",
+      "2 cloves garlic, minced",
+      "1 tsp ginger, grated",
+      "1 tsp cumin seeds",
+      "1 tsp garam masala",
+      "2 tbsp oil",
+      "Salt to taste"
+    ],
+    "instructions": "Heat oil, add cumin seeds, onions, garlic, and ginger, sauté until golden. Add tomatoes and cook until soft. Add spinach and salt, cover and cook until wilted. Blend slightly for creamy texture, stir in garam masala and cook 5 more minutes. Serve with naan or rice.",
+    "tags": ["pakistani", "vegetarian", "curry", "quick"],
+    "source": "https://www.tasteofhome.com/recipes/saag-paneer/"
+  },
+  {
+    "id": "indian_jeera_rice",
+    "name": "Jeera Rice (Cumin Rice)",
+    "ingredients": [
+      "1 cup basmati rice",
+      "1 3/4 cup water",
+      "1 tbsp ghee or oil",
+      "1 tsp cumin seeds",
+      "1 bay leaf",
+      "2 cloves",
+      "Salt to taste"
+    ],
+    "instructions": "Rinse rice until water runs clear. Heat ghee/oil, add cumin seeds, bay leaf, and cloves until fragrant. Add rice and salt, sauté briefly. Add water, bring to boil, cover and simmer on low for 15 minutes. Fluff with fork and serve.",
+    "tags": ["indian", "vegetarian", "rice", "quick"],
+    "source": "https://www.vegrecipesofindia.com/jeera-rice-recipe/"
+  },
+
+  {
+    "id": "chinese_red_cooked_pork_style_beef",
+    "name": "Chinese Red-Cooked Beef (Hong Shao Niu Rou Style)",
+    "ingredients": [
+      "1.5 lbs beef brisket or chuck, cut into cubes",
+      "3 tbsp soy sauce",
+      "2 tbsp dark soy sauce",
+      "2 tbsp Shaoxing wine (optional, can omit)",
+      "2 tbsp sugar",
+      "3 slices ginger",
+      "2 star anise",
+      "1 cinnamon stick",
+      "3 cloves garlic",
+      "4 cups water",
+      "2 green onions, cut into 2-inch pieces",
+      "1 tbsp oil"
+    ],
+    "instructions": "Blanch beef cubes in boiling water for 5 minutes, then drain. Heat oil in pot, add ginger and garlic until fragrant. Add beef, sugar, and stir until sugar caramelizes slightly. Add soy sauces, Shaoxing wine, star anise, cinnamon, green onions, and water. Bring to boil, then simmer covered for 2-3 hours or until beef is tender. Serve with steamed rice.",
+    "tags": ["chinese", "beef", "time-intensive", "dinner"],
+    "source": "https://omnivorescookbook.com/red-braised-beef/"
+  },
+  {
+    "id": "pakistani_nihari",
+    "name": "Nihari (Slow-Cooked Beef Stew)",
+    "ingredients": [
+      "2 lbs beef shank or stew meat",
+      "2 onions, sliced",
+      "4 tbsp oil",
+      "2 tbsp ginger garlic paste",
+      "1 tbsp nihari masala",
+      "1 tsp turmeric",
+      "2 tsp chili powder",
+      "Salt to taste",
+      "6 cups water",
+      "Fresh ginger julienne and lemon for garnish",
+      "Chopped cilantro and green chilies"
+    ],
+    "instructions": "Heat oil, sauté onions until golden. Add ginger garlic paste, sauté. Add beef, turmeric, chili powder, salt, and nihari masala. Mix well and cook for 10 minutes. Add water, cover and cook on low heat for 6-8 hours (overnight preferred) until beef is very tender and broth is rich. Garnish with ginger, cilantro, green chilies, and lemon wedges. Serve hot with naan.",
+    "tags": ["pakistani", "beef", "overnight", "dinner"],
+    "source": "https://www.tasteofpakistan.com/nihari/"
+  },
+  {
+    "id": "indian_butter_chicken",
+    "name": "Butter Chicken (Murgh Makhani)",
+    "ingredients": [
+      "1 lb chicken thighs, boneless and skinless",
+      "1 cup yogurt",
+      "2 tbsp lemon juice",
+      "2 tsp garam masala",
+      "1 tsp turmeric",
+      "1 tsp chili powder",
+      "4 tbsp butter",
+      "1 onion, chopped",
+      "2 cloves garlic, minced",
+      "1 inch ginger, minced",
+      "1 cup tomato puree",
+      "1/2 cup cream",
+      "Salt to taste",
+      "Fresh cilantro for garnish"
+    ],
+    "instructions": "Marinate chicken with yogurt, lemon juice, turmeric, chili powder, and garam masala for at least 4 hours or overnight. Grill or pan-fry chicken until cooked. In a pan, melt butter, sauté onions, garlic, and ginger until golden. Add tomato puree, cook until oil separates. Add cream and salt. Add chicken pieces and simmer for 15 minutes. Garnish with cilantro. Serve with naan or rice.",
+    "tags": ["indian", "chicken", "overnight", "time-intensive", "dinner"],
+    "source": "https://www.vegrecipesofindia.com/butter-chicken/"
+  },
+  {
+    "id": "mexican_carnitas",
+    "name": "Mexican Carnitas (Slow-Cooked Pork, Pork-Free Version)",
+    "ingredients": [
+      "2 lbs boneless chicken thighs or beef chuck roast",
+      "1 orange, juiced",
+      "1 lime, juiced",
+      "4 cloves garlic",
+      "1 onion, chopped",
+      "1 tsp cumin",
+      "1 tsp oregano",
+      "Salt and pepper to taste",
+      "2 bay leaves",
+      "2 tbsp vegetable oil"
+    ],
+    "instructions": "Combine chicken or beef with orange juice, lime juice, garlic, onion, cumin, oregano, salt, pepper, and bay leaves in a slow cooker. Cook on low for 6-8 hours until meat is tender and shreds easily. Remove meat and crisp under broiler or in hot pan if desired. Serve with tortillas, salsa, and lime wedges.",
+    "tags": ["mexican", "time-intensive", "slow-cooker", "dinner", "no pork"],
+    "source": "https://www.simplyrecipes.com/recipes/carnitas/"
+  },
+  {
+    "id": "italian_osso_buco",
+    "name": "Osso Buco (Braised Veal Shanks)",
+    "ingredients": [
+      "4 veal shanks (or beef shanks)",
+      "Salt and pepper",
+      "1/2 cup flour",
+      "3 tbsp olive oil",
+      "1 onion, diced",
+      "2 carrots, diced",
+      "2 celery stalks, diced",
+      "2 cloves garlic, minced",
+      "1 cup white wine (can substitute with chicken broth)",
+      "2 cups beef broth",
+      "1 can (14 oz) diced tomatoes",
+      "2 tbsp tomato paste",
+      "1 tsp dried thyme",
+      "1 bay leaf",
+      "Fresh parsley for garnish"
+    ],
+    "instructions": "Season shanks with salt and pepper, dredge in flour. Brown shanks in olive oil, set aside. Sauté onion, carrot, celery, and garlic until soft. Deglaze pan with wine or broth. Add broth, tomatoes, tomato paste, thyme, bay leaf, and shanks. Cover and braise in oven at 325°F for 2.5 to 3 hours until meat is tender. Garnish with parsley. Serve with risotto or polenta.",
+    "tags": ["italian", "time-intensive", "dinner", "braised"],
+    "source": "https://www.seriouseats.com/osso-buco-recipe"
+  },
+  {
+    "id": "mediterranean_lamb_tagine",
+    "name": "Moroccan Lamb Tagine",
+    "ingredients": [
+      "2 lbs lamb shoulder, cut into chunks",
+      "2 onions, sliced",
+      "3 cloves garlic, minced",
+      "1 tbsp ginger, grated",
+      "1 tsp turmeric",
+      "1 tsp cinnamon",
+      "1 tsp cumin",
+      "1/2 tsp saffron threads (optional)",
+      "1 cup dried apricots",
+      "1 cup chicken broth",
+      "2 tbsp olive oil",
+      "Salt and pepper to taste",
+      "Fresh cilantro for garnish",
+      "Almonds for garnish"
+    ],
+    "instructions": "Heat olive oil in a heavy pot, brown lamb pieces on all sides. Remove lamb. Sauté onions, garlic, and ginger until soft. Add spices, cook for 1 minute. Return lamb, add broth and apricots. Cover and simmer on low for 2-3 hours until lamb is tender. Garnish with cilantro and almonds. Serve with couscous.",
+    "tags": ["mediterranean", "lamb", "time-intensive", "dinner", "braised"],
+    "source": "https://www.bonappetit.com/recipe/lamb-tagine-with-apricots"
+  },
+  {
+    "id": "chinese_pork_belly_braised_style_no_pork",
+    "name": "Chinese Soy-Braised Beef Brisket",
+    "ingredients": [
+      "2 lbs beef brisket",
+      "3 tbsp soy sauce",
+      "2 tbsp dark soy sauce",
+      "1 tbsp sugar",
+      "2 star anise",
+      "2 slices ginger",
+      "4 cloves garlic",
+      "1 cinnamon stick",
+      "2 green onions",
+      "4 cups water",
+      "1 tbsp vegetable oil"
+    ],
+    "instructions": "Blanch beef brisket, then drain. Heat oil in pot, add ginger, garlic, star anise, and cinnamon until fragrant. Add beef and sugar, caramelize slightly. Add soy sauces, water, and green onions. Simmer for 2-3 hours until tender. Slice and serve with steamed rice.",
+    "tags": ["chinese", "beef", "time-intensive", "dinner"],
+    "source": "https://thewoksoflife.com/chinese-braised-beef/"
+  },
+  {
+    "id": "pakistani_beef_korma",
+    "name": "Beef Korma",
+    "ingredients": [
+      "2 lbs beef, cut into cubes",
+      "1 cup yogurt",
+      "2 onions, finely sliced",
+      "2 tbsp ginger garlic paste",
+      "1/2 cup ground almonds",
+      "1 tsp turmeric",
+      "1 tsp chili powder",
+      "1 tsp garam masala",
+      "4 tbsp oil",
+      "Salt to taste",
+      "Fresh coriander for garnish"
+    ],
+    "instructions": "Heat oil and fry onions until golden brown. Add ginger garlic paste, sauté. Add beef cubes, turmeric, chili powder, and salt; cook until browned. Add yogurt and ground almonds, mix well. Cover and cook on low heat for 2-3 hours until beef is tender. Sprinkle garam masala and garnish with coriander. Serve with rice or naan.",
+    "tags": ["pakistani", "beef", "time-intensive", "dinner"],
+    "source": "https://www.tasteofpakistan.com/beef-korma/"
+  },
+  {
+    "id": "indian_chicken_dum_biryani",
+    "name": "Chicken Dum Biryani (Layered Biryani)",
+    "ingredients": [
+      "1 lb chicken, cut into pieces",
+      "2 cups basmati rice",
+      "1 cup yogurt",
+      "2 onions, sliced",
+      "1 tbsp ginger garlic paste",
+      "1/2 cup chopped mint and coriander leaves",
+      "1 tbsp garam masala",
+      "1 tsp turmeric",
+      "2-3 green chilies",
+      "4 tbsp oil or ghee",
+      "Saffron soaked in warm milk (optional)",
+      "Salt to taste"
+    ],
+    "instructions": "Marinate chicken with yogurt, ginger garlic paste, turmeric, garam masala, salt, and half of the herbs for at least 2 hours. Parboil rice with salt and whole spices. In a heavy-bottomed pot, layer chicken and rice alternately, sprinkling herbs and saffron milk between layers. Seal pot and cook on low heat (dum) for 45-60 minutes. Serve with raita.",
+    "tags": ["indian", "chicken", "overnight", "time-intensive", "dinner"],
+    "source": "https://www.archanaskitchen.com/chicken-dum-biryani-recipe"
+  },
+  {
+    "id": "mexican_mole_poblano",
+    "name": "Mole Poblano (Traditional Mexican Sauce)",
+    "ingredients": [
+      "4 dried ancho chiles",
+      "4 dried pasilla chiles",
+      "2 dried mulato chiles",
+      "1 tortilla",
+      "1/4 cup almonds",
+      "2 tbsp sesame seeds",
+      "1 small onion",
+      "2 cloves garlic",
+      "1 tomato",
+      "1 tbsp chili powder",
+      "1 tsp cinnamon",
+      "1 oz dark chocolate",
+      "4 cups chicken broth",
+      "2 tbsp vegetable oil",
+      "Salt to taste"
+    ],
+    "instructions": "Toast chiles, seeds, almonds, tortilla, and spices separately until fragrant. Soak chiles in hot water for 20 minutes. Blend all ingredients with onion, garlic, tomato, and broth until smooth. Heat oil in a pot, cook the sauce for 20 minutes stirring constantly. Add chocolate and salt. Simmer sauce with cooked chicken for 1 hour before serving with rice.",
+    "tags": ["mexican", "time-intensive", "sauce", "dinner"],
+    "source": "https://www.mexicoinmykitchen.com/mole-poblano-recipe/"
+  },
+  {
+    "id": "italian_ragu_bolognese",
+    "name": "Ragu Bolognese",
+    "ingredients": [
+      "1 lb ground beef",
+      "1 onion, chopped",
+      "2 carrots, chopped",
+      "2 celery stalks, chopped",
+      "2 cloves garlic, minced",
+      "1 cup tomato puree",
+      "1/2 cup milk",
+      "1/2 cup red wine (optional)",
+      "3 tbsp olive oil",
+      "Salt and pepper to taste"
+    ],
+    "instructions": "Heat oil, sauté onion, carrots, celery, and garlic until soft. Add ground beef and brown. Add tomato puree, milk, and wine (if using). Simmer uncovered for at least 2 hours, stirring occasionally. Season with salt and pepper. Serve with pasta and Parmesan.",
+    "tags": ["italian", "time-intensive", "dinner"],
+    "source": "https://www.bonappetit.com/recipe/classic-bolognese"
+  },
+  {
+    "id": "mediterranean_stuffed_eggplant",
+    "name": "Mediterranean Stuffed Eggplant",
+    "ingredients": [
+      "2 large eggplants",
+      "1 onion, chopped",
+      "2 tomatoes, chopped",
+      "1 cup cooked chickpeas",
+      "2 cloves garlic, minced",
+      "1/4 cup pine nuts",
+      "2 tbsp olive oil",
+      "1 tsp cumin",
+      "1/2 tsp cinnamon",
+      "Salt and pepper to taste",
+      "Fresh parsley for garnish"
+    ],
+    "instructions": "Halve eggplants and scoop out flesh. Roast eggplant halves until soft. Sauté onion, garlic, tomatoes, and spices until cooked. Add chickpeas and pine nuts. Stuff mixture into eggplant shells. Bake for another 30 minutes at 375°F. Garnish with parsley and serve.",
+    "tags": ["mediterranean", "vegetarian", "time-intensive", "dinner"],
+    "source": "https://www.olivemagazine.com/recipes/vegan/stuffed-aubergines/"
+  },
+  {
+    "id": "chinese_sweet_and_sour_chicken_long",
+    "name": "Sweet and Sour Chicken (Long Prep)",
+    "ingredients": [
+      "1 lb chicken breast, cut into bite-size pieces",
+      "1/2 cup cornstarch",
+      "1 egg, beaten",
+      "1 bell pepper, chopped",
+      "1/2 cup pineapple chunks",
+      "1/4 cup vinegar",
+      "1/4 cup ketchup",
+      "1/4 cup sugar",
+      "1 tbsp soy sauce",
+      "1 tbsp oil"
+    ],
+    "instructions": "Marinate chicken in egg, then coat with cornstarch. Deep fry until golden. In a pan, heat oil, add bell pepper and pineapple, sauté briefly. Mix vinegar, ketchup, sugar, and soy sauce, add to pan. Add fried chicken, toss to coat in sauce. Cook for 5 minutes. Serve with rice.",
+    "tags": ["chinese", "chicken", "time-intensive", "dinner"],
+    "source": "https://www.seriouseats.com/sweet-and-sour-chicken"
+  },
+  {
+    "id": "pakistani_haleem",
+    "name": "Haleem (Slow-Cooked Lentil and Meat Stew)",
+    "ingredients": [
+      "1 cup cracked wheat",
+      "1/2 cup lentils (split chickpeas, red lentils)",
+      "1 lb beef or chicken, shredded",
+      "2 onions, sliced",
+      "2 tbsp ginger garlic paste",
+      "4 tbsp oil",
+      "1 tbsp chili powder",
+      "1 tbsp turmeric",
+      "1 tbsp garam masala",
+      "Salt to taste",
+      "Fresh coriander and fried onions for garnish"
+    ],
+    "instructions": "Soak wheat and lentils overnight. Cook meat with onions and spices until tender. Blend soaked wheat and lentils, add to meat. Cook on low heat for 4-6 hours stirring occasionally until creamy. Garnish with fried onions and coriander. Serve hot with naan.",
+    "tags": ["pakistani", "time-intensive", "overnight", "dinner"],
+    "source": "https://www.tasteofpakistan.com/haleem/"
+  },
+  {
+    "id": "indian_chicken_tikka_masala",
+    "name": "Chicken Tikka Masala",
+    "ingredients": [
+      "1 lb chicken breast, cubed",
+      "1 cup yogurt",
+      "2 tsp garam masala",
+      "1 tsp turmeric",
+      "1 tsp chili powder",
+      "2 tbsp oil",
+      "1 onion, chopped",
+      "2 cloves garlic, minced",
+      "1 inch ginger, minced",
+      "1 cup tomato puree",
+      "1/2 cup cream",
+      "Salt to taste",
+      "Fresh cilantro for garnish"
+    ],
+    "instructions": "Marinate chicken in yogurt and spices for at least 4 hours or overnight. Grill or pan-fry chicken until cooked. In a pan, sauté onions, garlic, and ginger until soft. Add tomato puree and cook until oil separates. Add cream and cooked chicken, simmer for 15 minutes. Garnish and serve with rice or naan.",
+    "tags": ["indian", "chicken", "overnight", "time-intensive", "dinner"],
+    "source": "https://www.bbcgoodfood.com/recipes/chicken-tikka-masala"
+  },
+  {
+    "id": "classic_mojito_mocktail",
+    "name": "Classic Mojito Mocktail",
+    "ingredients": [
+      "10 fresh mint leaves",
+      "1/2 lime, cut into 4 wedges",
+      "2 tbsp sugar",
+      "1 cup ice cubes",
+      "1/2 cup club soda"
+    ],
+    "instructions": "Muddle mint leaves and 1 lime wedge in a glass. Add 2 more lime wedges and sugar, muddle again. Fill glass with ice, top with club soda. Stir gently and garnish with remaining lime wedge and mint sprig.",
+    "tags": ["drink", "non-alcoholic", "refreshing", "easy"],
+    "source": "https://www.simplyrecipes.com/recipes/mojito_mocktail/"
+  },
+  {
+    "id": "iced_matcha_latte",
+    "name": "Iced Matcha Latte",
+    "ingredients": [
+      "1 tsp matcha powder",
+      "2 oz hot water",
+      "1 cup milk or plant-based milk",
+      "Ice cubes",
+      "1 tsp honey or sweetener (optional)"
+    ],
+    "instructions": "Whisk matcha powder with hot water until smooth and frothy. Fill glass with ice, pour milk, then add matcha mixture. Stir gently. Add honey if desired.",
+    "tags": ["drink", "non-alcoholic", "coffee_alternative", "easy"],
+    "source": "https://www.thespruceeats.com/how-to-make-iced-matcha-latte-765257"
+  },
+  {
+    "id": "cold_brew_coffee",
+    "name": "Cold Brew Coffee",
+    "ingredients": [
+      "1 cup coarsely ground coffee",
+      "4 cups cold water"
+    ],
+    "instructions": "Combine coffee grounds and cold water in a jar or pitcher. Stir gently, cover, and refrigerate for 12-24 hours. Strain through a fine mesh or coffee filter. Serve over ice with milk or sweetener as desired.",
+    "tags": ["drink", "coffee", "time-intensive", "non-alcoholic"],
+    "source": "https://www.stumptowncoffee.com/blogs/learn/how-to-make-cold-brew-coffee"
+  },
+  {
+    "id": "pineapple_mango_smoothie",
+    "name": "Pineapple Mango Smoothie",
+    "ingredients": [
+      "1 cup frozen pineapple chunks",
+      "1 cup frozen mango chunks",
+      "1/2 cup orange juice",
+      "1/2 cup Greek yogurt",
+      "1 tbsp honey (optional)"
+    ],
+    "instructions": "Blend all ingredients until smooth. Serve immediately.",
+    "tags": ["drink", "smoothie", "non-alcoholic", "healthy"],
+    "source": "https://www.allrecipes.com/recipe/244251/pineapple-mango-smoothie/"
+  },
+  {
+    "id": "golden_milk_turmeric_latte",
+    "name": "Golden Milk (Turmeric Latte)",
+    "ingredients": [
+      "1 cup milk or plant-based milk",
+      "1/2 tsp turmeric powder",
+      "1/4 tsp ground cinnamon",
+      "1/4 tsp ground ginger",
+      "1 tsp honey or maple syrup"
+    ],
+    "instructions": "Heat milk gently, whisk in turmeric, cinnamon, and ginger. Sweeten with honey or maple syrup. Serve warm.",
+    "tags": ["drink", "non-alcoholic", "healthy", "warm"],
+    "source": "https://www.healthline.com/nutrition/golden-milk-turmeric-latte"
+  },
+  {
+    "id": "fresh_ginger_lemonade",
+    "name": "Fresh Ginger Lemonade",
+    "ingredients": [
+      "1 cup freshly squeezed lemon juice",
+      "4 cups cold water",
+      "1/2 cup honey or sugar",
+      "2 inch piece fresh ginger, peeled and sliced"
+    ],
+    "instructions": "Make a ginger syrup by simmering ginger with 1 cup water and honey for 10 minutes. Strain syrup. Mix ginger syrup with lemon juice and remaining water. Serve over ice.",
+    "tags": ["drink", "non-alcoholic", "refreshing", "time-intensive"],
+    "source": "https://www.thekitchn.com/how-to-make-fresh-ginger-lemonade-229318"
+  },
+  {
+    "id": "mint_lemonade",
+    "name": "Mint Lemonade",
+    "ingredients": [
+      "1 cup freshly squeezed lemon juice",
+      "4 cups water",
+      "1/2 cup sugar",
+      "1/4 cup fresh mint leaves",
+      "Ice cubes"
+    ],
+    "instructions": "Muddle mint leaves with sugar. Add lemon juice and water, stir until sugar dissolves. Serve over ice with mint garnish.",
+    "tags": ["drink", "non-alcoholic", "refreshing"],
+    "source": "https://www.delish.com/cooking/recipe-ideas/a19665918/mint-lemonade-recipe/"
+  },
+  {
+    "id": "chai_tea_latte",
+    "name": "Chai Tea Latte",
+    "ingredients": [
+      "1 cup water",
+      "1 cup milk",
+      "2 black tea bags",
+      "2 cardamom pods",
+      "1 cinnamon stick",
+      "3 cloves",
+      "1 inch ginger, sliced",
+      "1-2 tsp sugar or honey"
+    ],
+    "instructions": "Simmer water with cardamom, cinnamon, cloves, and ginger for 10 minutes. Add tea bags and steep 5 minutes. Remove tea and spices, add milk and sweetener. Heat until hot but not boiling. Serve warm.",
+    "tags": ["drink", "non-alcoholic", "time-intensive", "warm"],
+    "source": "https://www.seriouseats.com/recipes/2011/11/masala-chai-indian-spiced-tea-recipe.html"
+  },
+  {
+    "id": "virgin_pina_colada",
+    "name": "Virgin Piña Colada",
+    "ingredients": [
+      "1 cup pineapple juice",
+      "1/2 cup coconut milk",
+      "1 cup crushed ice",
+      "Pineapple slice for garnish",
+      "Maraschino cherry for garnish"
+    ],
+    "instructions": "Blend pineapple juice, coconut milk, and crushed ice until smooth. Pour into glass and garnish with pineapple slice and cherry.",
+    "tags": ["drink", "non-alcoholic", "smoothie", "tropical"],
+    "source": "https://www.liquor.com/recipes/virgin-pina-colada/"
+  },
+  {
+    "id": "strawberry_basil_lemonade",
+    "name": "Strawberry Basil Lemonade",
+    "ingredients": [
+      "1 cup fresh strawberries, hulled",
+      "1/2 cup fresh lemon juice",
+      "1/2 cup sugar",
+      "4 cups cold water",
+      "1/4 cup fresh basil leaves"
+    ],
+    "instructions": "Muddle strawberries and basil in pitcher. Add lemon juice and sugar, stir until sugar dissolves. Add water and stir well. Chill and serve over ice.",
+    "tags": ["drink", "non-alcoholic", "refreshing", "fruit"],
+    "source": "https://www.foodnetwork.com/recipes/rachael-ray/strawberry-basil-lemonade-1944525"
+  },
+  {
+    "id": "turmeric_cucumber_smoothie",
+    "name": "Turmeric Cucumber Smoothie",
+    "ingredients": [
+      "1 cucumber, peeled and chopped",
+      "1 cup spinach",
+      "1/2 banana",
+      "1/2 tsp turmeric powder",
+      "1 cup coconut water",
+      "1 tbsp honey"
+    ],
+    "instructions": "Blend all ingredients until smooth. Serve immediately.",
+    "tags": ["drink", "smoothie", "healthy", "non-alcoholic"],
+    "source": "https://www.wellplated.com/turmeric-smoothie/"
+  },
+  {
+    "id": "carrot_orange_juice",
+    "name": "Carrot Orange Juice",
+    "ingredients": [
+      "4 large carrots, peeled",
+      "2 large oranges, peeled",
+      "1 inch piece of ginger (optional)",
+      "Ice cubes"
+    ],
+    "instructions": "Juice carrots, oranges, and ginger in a juicer. Serve over ice.",
+    "tags": ["drink", "non-alcoholic", "healthy", "juice"],
+    "source": "https://www.allrecipes.com/recipe/21593/carrot-orange-juice/"
+  },
+  {
+    "id": "cucumber_mint_water",
+    "name": "Cucumber Mint Infused Water",
+    "ingredients": [
+      "1/2 cucumber, thinly sliced",
+      "10 fresh mint leaves",
+      "8 cups cold water",
+      "Ice cubes"
+    ],
+    "instructions": "Add cucumber slices and mint leaves to a pitcher of water. Refrigerate for at least 1 hour. Serve chilled with ice.",
+    "tags": ["drink", "non-alcoholic", "refreshing", "infused water"],
+    "source": "https://www.healthline.com/nutrition/infused-water-benefits"
+  },
+  {
+    "id": "banana_berry_smoothie",
+    "name": "Banana Berry Smoothie",
+    "ingredients": [
+      "1 banana",
+      "1/2 cup mixed berries (fresh or frozen)",
+      "1/2 cup Greek yogurt",
+      "1/2 cup milk or plant-based milk",
+      "1 tbsp honey"
+    ],
+    "instructions": "Blend all ingredients until smooth. Serve immediately.",
+    "tags": ["drink", "smoothie", "non-alcoholic", "healthy"],
+    "source": "https://www.loveandlemons.com/berry-smoothie/"
+  },
+  {
+    "id": "hot_cocoa_with_cinnamon",
+    "name": "Hot Cocoa with Cinnamon",
+    "ingredients": [
+      "2 cups milk or plant-based milk",
+      "2 tbsp unsweetened cocoa powder",
+      "1-2 tbsp sugar or sweetener",
+      "1/4 tsp ground cinnamon",
+      "Whipped cream (optional)"
+    ],
+    "instructions": "Heat milk in saucepan. Whisk in cocoa powder, sugar, and cinnamon until smooth and warm. Serve topped with whipped cream if desired.",
+    "tags": ["drink", "non-alcoholic", "warm", "comfort"],
+    "source": "https://www.simplyrecipes.com/recipes/hot_chocolate/"
+  },
+  {
+    "id": "basbousa_middle_eastern_semolina_cake",
+    "name": "Basbousa (Middle Eastern Semolina Cake)",
+    "ingredients": [
+      "1 cup semolina",
+      "1/2 cup sugar",
+      "1 cup plain yogurt",
+      "1/4 cup unsweetened shredded coconut",
+      "1/4 cup melted butter",
+      "1 tsp baking powder",
+      "Blanched almonds (for garnish)",
+      "For syrup: 3/4 cup sugar, 1/2 cup water, 1 tsp lemon juice, 1 tsp rose water"
+    ],
+    "instructions": "Mix semolina, sugar, yogurt, coconut, butter, and baking powder. Pour into greased baking dish, flatten, and top with almonds. Bake at 350°F for 30-35 minutes. Meanwhile, simmer syrup ingredients and pour over hot cake once baked. Cool before serving.",
+    "tags": ["dessert", "baked", "non-alcoholic", "middle_eastern"],
+    "source": "https://www.seriouseats.com/basbousa-recipe"
+  },
+  {
+    "id": "rasmalai",
+    "name": "Rasmalai",
+    "ingredients": [
+      "1 liter full-fat milk",
+      "1 tbsp lemon juice",
+      "4 cups water",
+      "1 cup sugar",
+      "500 ml milk (for rabri)",
+      "1/4 cup condensed milk",
+      "Cardamom powder, saffron, and chopped pistachios"
+    ],
+    "instructions": "Curdle milk to make chenna, knead and shape into balls. Boil in sugar syrup. Meanwhile, prepare rabri with milk, condensed milk, cardamom, and saffron. Soak balls in chilled rabri and garnish with nuts.",
+    "tags": ["dessert", "indian", "non-alcoholic", "time-intensive"],
+    "source": "https://www.indianhealthyrecipes.com/rasmalai-recipe/"
+  },
+  {
+    "id": "mango_sticky_rice",
+    "name": "Mango Sticky Rice",
+    "ingredients": [
+      "1 cup glutinous rice",
+      "1 1/2 cups coconut milk",
+      "1/2 cup sugar",
+      "1/4 tsp salt",
+      "2 ripe mangoes, sliced"
+    ],
+    "instructions": "Soak and steam glutinous rice. Heat coconut milk with sugar and salt. Mix most of it into warm rice and let sit. Serve with sliced mango and drizzle with extra coconut sauce.",
+    "tags": ["dessert", "thai", "non-alcoholic", "rice_based"],
+    "source": "https://hot-thai-kitchen.com/mango-sticky-rice/"
+  },
+  {
+    "id": "um_ali",
+    "name": "Um Ali (Egyptian Bread Pudding)",
+    "ingredients": [
+      "1 sheet puff pastry",
+      "2 cups milk",
+      "1 cup cream",
+      "1/2 cup sugar",
+      "1/4 cup chopped nuts (pistachios, almonds)",
+      "1/4 cup shredded coconut",
+      "1/4 cup raisins",
+      "1 tsp vanilla extract"
+    ],
+    "instructions": "Bake and shred puff pastry. Mix with nuts, coconut, and raisins in baking dish. Pour hot milk-cream-sugar mixture over it. Bake at 375°F until golden and bubbling.",
+    "tags": ["dessert", "non-alcoholic", "middle_eastern", "baked"],
+    "source": "https://www.tasteofhome.com/recipes/om-ali/"
+  },
+  {
+    "id": "japanese_mochi",
+    "name": "Japanese Mochi (Microwave Method)",
+    "ingredients": [
+      "1 cup glutinous rice flour",
+      "3/4 cup water",
+      "1/4 cup sugar",
+      "Cornstarch or potato starch (for dusting)"
+    ],
+    "instructions": "Mix flour, sugar, and water in microwave-safe bowl. Microwave in 1-minute intervals, stirring in between, until sticky and translucent. Dust surface with starch, roll and cut.",
+    "tags": ["dessert", "asian", "non-alcoholic", "gluten-free"],
+    "source": "https://www.justonecookbook.com/mochi/"
+  },
+  {
+    "id": "banoffee_pie",
+    "name": "Banoffee Pie",
+    "ingredients": [
+      "1 1/2 cups crushed digestive biscuits",
+      "1/2 cup melted butter",
+      "1 can dulce de leche",
+      "2 bananas, sliced",
+      "1 cup whipped cream",
+      "Dark chocolate shavings"
+    ],
+    "instructions": "Press biscuit-butter mix into pie dish. Chill. Spread dulce de leche, top with bananas, then whipped cream. Garnish with chocolate. Chill before serving.",
+    "tags": ["dessert", "british", "non-alcoholic", "no_bake"],
+    "source": "https://www.bbcgoodfood.com/recipes/banoffee-pie"
+  },
+  {
+    "id": "chocolate_avocado_mousse",
+    "name": "Chocolate Avocado Mousse",
+    "ingredients": [
+      "2 ripe avocados",
+      "1/4 cup cocoa powder",
+      "1/4 cup honey or maple syrup",
+      "1/4 cup almond milk",
+      "1 tsp vanilla extract"
+    ],
+    "instructions": "Blend all ingredients until smooth. Chill before serving. Garnish with berries or nuts.",
+    "tags": ["dessert", "non-alcoholic", "healthy", "no_bake"],
+    "source": "https://www.loveandlemons.com/avocado-chocolate-mousse/"
+  },
+  {
+    "id": "malaysian_pandan_layer_cake",
+    "name": "Pandan Layer Cake",
+    "ingredients": [
+      "6 eggs",
+      "1 cup sugar",
+      "1/2 cup vegetable oil",
+      "1/2 cup coconut milk",
+      "1 tbsp pandan extract",
+      "1 1/2 cups cake flour",
+      "1 tsp baking powder"
+    ],
+    "instructions": "Whip eggs and sugar. Add oil, milk, and pandan. Fold in flour and baking powder. Bake at 350°F for 30-35 minutes.",
+    "tags": ["dessert", "asian", "non-alcoholic", "baked"],
+    "source": "https://www.rotinrice.com/pandan-layer-cake/"
+  },
+  {
+    "id": "pakistani_zarda",
+    "name": "Zarda (Sweet Rice)",
+    "ingredients": [
+      "1 cup basmati rice",
+      "1/2 cup sugar",
+      "1/4 cup ghee or butter",
+      "1/4 cup chopped nuts and dried fruit",
+      "1/4 tsp cardamom",
+      "Pinch of saffron or yellow food coloring"
+    ],
+    "instructions": "Boil rice with saffron or coloring. In a pan, heat ghee and add cardamom. Add rice, sugar, and nuts. Cook on low heat till sugar melts and rice is glazed.",
+    "tags": ["dessert", "pakistani", "non-alcoholic", "rice_based"],
+    "source": "https://www.teaforturmeric.com/zarda-sweet-rice/"
+  },
+  {
+    "id": "rice_pudding_kheer",
+    "name": "Kheer (Rice Pudding)",
+    "ingredients": [
+      "1/2 cup basmati rice",
+      "1 liter milk",
+      "1/2 cup sugar",
+      "Cardamom powder",
+      "Chopped almonds and pistachios"
+    ],
+    "instructions": "Boil rice in milk, simmer for 30-40 minutes till thick. Add sugar, cardamom, and nuts. Chill before serving.",
+    "tags": ["dessert", "indian", "non-alcoholic", "time-intensive"],
+    "source": "https://www.vegrecipesofindia.com/rice-kheer-recipe/"
+  },
+  {
+    "id": "chinese_mooncakes_red_bean",
+    "name": "Red Bean Mooncakes",
+    "ingredients": [
+      "1 cup red bean paste",
+      "1 1/2 cups flour",
+      "1/4 cup golden syrup",
+      "1/4 cup oil",
+      "1/2 tsp baking soda"
+    ],
+    "instructions": "Make dough from syrup, oil, and flour. Chill. Shape dough around bean paste balls. Bake at 375°F for 10-12 minutes. Let rest 1–2 days before serving.",
+    "tags": ["dessert", "chinese", "non-alcoholic", "baked", "time-intensive"],
+    "source": "https://redhousespice.com/mooncakes/"
+  },
+  {
+    "id": "halva_semolina",
+    "name": "Semolina Halva (Sooji Halwa)",
+    "ingredients": [
+      "1 cup semolina",
+      "1/2 cup ghee",
+      "3/4 cup sugar",
+      "2 cups water",
+      "Cardamom powder",
+      "Chopped nuts (optional)"
+    ],
+    "instructions": "Roast semolina in ghee. Separately heat sugar and water. Add to semolina, stirring constantly. Cook till thick. Add cardamom and garnish.",
+    "tags": ["dessert", "indian", "non-alcoholic", "stovetop"],
+    "source": "https://www.indianhealthyrecipes.com/sooji-halwa-recipe/"
+  },
+  {
+    "id": "korean_honey_pancakes_hoeddeok",
+    "name": "Hoeddeok (Korean Sweet Pancakes)",
+    "ingredients": [
+      "1 cup all-purpose flour",
+      "1/2 tsp yeast",
+      "1/2 cup warm milk",
+      "2 tbsp sugar",
+      "Filling: brown sugar, cinnamon, chopped walnuts"
+    ],
+    "instructions": "Make dough and rest 1 hour. Shape into balls, fill with sugar/nut mix. Pan-fry until golden and caramelized inside.",
+    "tags": ["dessert", "korean", "non-alcoholic", "stovetop"],
+    "source": "https://www.maangchi.com/recipe/hotteok"
+  },
+  {
+    "id": "moroccan_orange_cinnamon_salad",
+    "name": "Moroccan Orange & Cinnamon Salad",
+    "ingredients": [
+      "4 navel oranges, peeled and sliced",
+      "1 tsp cinnamon",
+      "1 tsp orange blossom water (optional)",
+      "1 tbsp powdered sugar"
+    ],
+    "instructions": "Arrange orange slices, sprinkle with cinnamon, sugar, and orange blossom water. Chill before serving.",
+    "tags": ["dessert", "moroccan", "non-alcoholic", "no_bake", "fruit"],
+    "source": "https://www.saveur.com/article/Recipes/Moroccan-Orange-Salad/"
+  }
+]

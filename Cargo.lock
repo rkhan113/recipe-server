@@ -488,6 +488,7 @@ dependencies = [
  "axum",
  "axum-extra",
  "mime",
+ "once_cell",
  "serde",
  "tokio",
  "tower-http",

@@ -11,15 +11,19 @@
 
     <!-- Recipe section -->
     <div class="recipe">
-        <span class="teller">{{recipe.name}}</span><br/>
+        <span class="recipe-name">{{recipe.name}}</span><br/>
 
         <!-- Ingredients section -->
         <h3>Ingredients</h3>
-        <p class="tellee">{{recipe.ingredients}}</p>
+        <ul class="ingredients">
+          {% for item in recipe.ingredients %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
 
         <!-- Instructions section -->
         <h3>Instructions</h3>
-        <p class="teller">{{recipe.instructions}}</p>
+        <p class="instructions">{{recipe.instructions}}</p>
     </div>
   </body>
 </html>

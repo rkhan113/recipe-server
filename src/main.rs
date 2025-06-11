@@ -2,8 +2,7 @@
 use axum::{self, response, routing};
 use tokio::net;
 use tower_http::services;
-use axum_extra::response as extra_response;
-use askama::Template;
+use askama::Template; // Import Askama's Template trait to enable render() method (was getting a warning before)
 
 // Bring in our local modules
 mod recipe;
@@ -11,8 +10,6 @@ mod templates;
 
 use recipe::*;
 use templates::*;
-
-
 
 // Route handler for the index page
 async fn get_recipe() -> response::Html<String> {
@@ -22,17 +19,12 @@ async fn get_recipe() -> response::Html<String> {
     response::Html(template.render().unwrap())
 }
 
-// Route handler for serving the CSS file
-async fn get_css() -> extra_response::Css<&'static str> {
-    extra_response::Css(r#".recipe { font-weight: bold; }"#)
-}
-
-// The main server setup
+// Main server setup
 async fn serve() -> Result<(), Box<dyn std::error::Error>> {
     // Create the router
     let app = axum::Router::new()
-        .route("/", routing::get(get_recipe)) // Handle index page
-        // Serve static CSS file from disk (not using get_css anymore)
+        .route("/", routing::get(get_recipe)) // Route for the index page
+        // Serve static CSS file from disk
         .route_service(
             "/recipe.css",
             services::ServeFile::new_with_mime("assets/static/recipe.css", &mime::TEXT_CSS),

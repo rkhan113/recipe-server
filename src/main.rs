@@ -21,13 +21,28 @@ async fn get_recipe() -> response::Html<String> {
 
 // Main server setup
 async fn serve() -> Result<(), Box<dyn std::error::Error>> {
+    
+    // Define MIME type for favicon (.ico file)
+    let mime_favicon = "image/vnd.microsoft.icon".parse().unwrap();
+    
     // Create the router
     let app = axum::Router::new()
         .route("/", routing::get(get_recipe)) // Route for the index page
-        // Serve static CSS file from disk
+        // Serve static CSS file (must match file path & MIME)
         .route_service(
             "/recipe.css",
-            services::ServeFile::new_with_mime("assets/static/recipe.css", &mime::TEXT_CSS),
+            services::ServeFile::new_with_mime(
+                "assets/static/recipe.css",
+                &mime::TEXT_CSS_UTF_8,
+            ),
+        )
+        // Serve favicon (browser requests this at /favicon.ico)        
+        .route_service(
+            "/favicon.ico",
+            services::ServeFile::new_with_mime(
+                "assets/static/favicon.ico",
+                &mime_favicon,
+            ),
         );
 
     // Bind to localhost on port 3000

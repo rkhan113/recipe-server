@@ -1,5 +1,5 @@
 <!-- Basic HTML template for Askama -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Recipe Server</title>
@@ -12,7 +12,13 @@
     <!-- Recipe section -->
     <div class="recipe">
         <span class="teller">{{recipe.name}}</span><br/>
-        <p class="tellee">{{recipe.ingredients}}</p><br/>
+
+        <!-- Ingredients section -->
+        <h3>Ingredients</h3>
+        <p class="tellee">{{recipe.ingredients}}</p>
+
+        <!-- Instructions section -->
+        <h3>Instructions</h3>
         <p class="teller">{{recipe.instructions}}</p>
     </div>
   </body>

@@ -1,3 +1,8 @@
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+
+
 // Recipe struct to represent a recipe
 pub struct Recipe {
     pub name: &'static str,

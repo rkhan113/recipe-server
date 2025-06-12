@@ -4,7 +4,7 @@ mod templates;
 
 use axum::{self, extract::State, response, routing};
 use clap::Parser;
-use sqlx::{SqlitePool, migrate::MigrateDatabase, sqlite};
+use sqlx::{SqlitePool, migrate::MigrateDatabase};
 use tokio::{net, sync::RwLock};
 use tower_http::{services, trace};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
@@ -14,7 +14,10 @@ use recipe::*;
 use templates::*;
 use askama::Template;
 use recipe::fallback_recipe;
+use axum::http::StatusCode;
 
+
+extern crate log;
 
 
 /// Command-line arguments
@@ -32,6 +35,12 @@ struct AppState {
     db: SqlitePool,
     current_recipe: Recipe, // Holds fallback recipe if DB query fails
 }
+/// Query parameters for selecting a recipe by ID
+#[derive(serde::Deserialize)]
+struct GetRecipeParams {
+    id: Option<String>,
+}
+
 /// Determine the database URI from the following sources:
 fn get_db_uri(db_uri: Option<&str>) -> String {
     if let Some(db_uri) = db_uri {
@@ -60,37 +69,92 @@ fn extract_db_dir(db_uri: &str) -> Result<&str, RecipeError> {
     }
 }
 
-/// Route handler: fetch a random recipe and render it as HTML
-async fn get_recipe(State(app_state): State<Arc<RwLock<AppState>>>) -> response::Html<String> {
-    let mut app_state = app_state.write().await;
-    let db = &app_state.db;
+/// Select a recipe by ID if provided, or choose a random recipe otherwise
+async fn choose_recipe(db: &SqlitePool, params: &GetRecipeParams) -> Result<Recipe, sqlx::Error> {
+    if let Some(id) = &params.id {
+        let row = sqlx::query!(
+            r#"
+            SELECT id, name, ingredients, instructions, tags, source
+            FROM recipes WHERE id = ?
+            "#,
+            id
+        )
+        .fetch_one(db)
+        .await?;
 
-    let recipe_result = sqlx::query!(
-        r#"
-        SELECT id, name, ingredients, instructions, tags, source 
-        FROM recipes 
-        ORDER BY RANDOM() LIMIT 1
-        "#
-    )
-    .fetch_one(db)
-    .await;
-
-    // Try to get a recipe from the DB, fallback if it fails
-    if let Ok(row) = recipe_result {
-        let recipe = Recipe {
+        Ok(Recipe {
             id: row.id.expect("Missing id"),
             name: row.name,
             ingredients: serde_json::from_str(&row.ingredients).unwrap(),
             instructions: row.instructions,
-            tags: row.tags.map(|t: String| serde_json::from_str(&t).unwrap()),
+            tags: row.tags.map(|t| serde_json::from_str(&t).unwrap()),
             source: row.source,
-        };
-        app_state.current_recipe = recipe;
+        })
+    } else {
+        let row = sqlx::query!(
+            r#"
+            SELECT id, name, ingredients, instructions, tags, source
+            FROM recipes ORDER BY RANDOM() LIMIT 1
+            "#
+        )
+        .fetch_one(db)
+        .await?;
+
+        Ok(Recipe {
+            id: row.id.expect("Missing id"),
+            name: row.name,
+            ingredients: serde_json::from_str(&row.ingredients).unwrap(),
+            instructions: row.instructions,
+            tags: row.tags.map(|t| serde_json::from_str(&t).unwrap()),
+            source: row.source,
+        })
+    }
+}
+
+/// Route handler: fetch a random recipe and render it as HTML
+async fn get_recipe(
+    State(app_state): State<Arc<RwLock<AppState>>>,
+    axum::extract::Query(params): axum::extract::Query<GetRecipeParams>,
+)-> Result<response::Html<String>, StatusCode> {
+    let mut app_state = app_state.write().await;
+    let db = app_state.db.clone();
+
+    let recipe_result = choose_recipe(&db, &params).await;
+
+    match recipe_result {
+        Ok(row) => {
+            let recipe = Recipe {
+                id: row.id,
+                name: row.name,
+                ingredients: row.ingredients,
+                instructions: row.instructions,
+                tags: row.tags,
+                source: row.source,
+            };
+
+            // Extract tag list if available
+            let tag_list = recipe
+                .tags
+                .clone()
+                .unwrap_or_default()
+                .into_iter()
+                .collect::<Vec<String>>();
+
+            let tag_string = tag_list.join(", ");
+
+            app_state.current_recipe = recipe.clone();
+            let template = IndexTemplate::new(recipe.clone(), tag_string);
+            Ok(response::Html(template.render().unwrap()))
+        }
+        Err(e) => {
+            log::warn!("Recipe fetch failed: {}", e);
+            Err(StatusCode::NOT_FOUND)
+        }
     }
 
-    let template = IndexTemplate::new(&app_state.current_recipe);
-    response::Html(template.render().unwrap())
+    
 }
+
 
 
 /// Seeds the database from a local JSON file

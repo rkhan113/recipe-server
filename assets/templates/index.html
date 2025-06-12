@@ -3,27 +3,36 @@
 <html>
   <head>
     <title>Recipe Server</title>
-    <!-- Link to stylesheet passed in from Askama template -->
     <link rel="stylesheet" href="{{stylesheet}}">
   </head>
   <body>
     <h1>Recipe</h1>
 
-    <!-- Recipe section -->
     <div class="recipe">
-        <span class="recipe-name">{{recipe.name}}</span><br/>
+      <span class="recipe-name">{{recipe.name}}</span><br/>
 
-        <!-- Ingredients section -->
-        <h3>Ingredients</h3>
-        <ul class="ingredients">
-          {% for item in recipe.ingredients %}
-            <li>{{ item }}</li>
-          {% endfor %}
-        </ul>
+      <!-- Ingredients section -->
+      <h3>Ingredients</h3>
+      <ul class="ingredients">
+        {% for item in recipe.ingredients %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
 
-        <!-- Instructions section -->
-        <h3>Instructions</h3>
-        <p class="instructions">{{recipe.instructions}}</p>
+      <!-- Instructions section -->
+      <h3>Instructions</h3>
+      <p class="instructions">{{recipe.instructions}}</p>
+
+      <!-- Optional Source -->
+      {% if recipe.source.is_some() %}
+        <span class="source">Source: {{ recipe.source.as_ref().unwrap() }}</span>
+      {% endif %}
+
+      <!-- Optional Tags -->
+      {% if tags.len() > 0 %}
+        <span class="tags">Tags: {{ tags }}</span>
+      {% endif %}
+
     </div>
   </body>
 </html>

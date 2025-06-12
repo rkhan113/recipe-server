@@ -12,3 +12,21 @@
 .ingredients {
   margin-bottom: 1em;
 }
+
+.source {
+  font-style: italic;
+  font-size: 75%;
+  margin-top: 0.5em;
+  display: block;
+}
+
+.tags {
+  font-style: italic;
+  font-size: 75%;
+  margin-left: 2em;
+  display: block;
+}
+
+.error {
+  color: #881111;
+}

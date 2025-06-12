@@ -7,6 +7,7 @@ use crate::RecipeError;
 
 
 #[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone)]
 pub struct Recipe {
     pub id: String,
     pub name: String,

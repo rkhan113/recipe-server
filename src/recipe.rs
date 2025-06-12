@@ -1,13 +1,20 @@
-// recipes.rs
+// recipe.rs
 
 use std::path::Path;
+use std::collections::HashSet;
+use std::ops::Deref;
+
+use axum::response::{IntoResponse, Response};
+use axum::Json;
 use serde::{Deserialize, Serialize};
-use crate::RecipeError;
-// use once_cell::sync::Lazy;
+use sqlx::SqlitePool;
 
+use crate::{AppState};
+use crate::error::RecipeError;
+use utoipa::ToSchema;
 
-#[derive(Debug, Deserialize, Serialize)]
-#[derive(Clone)]
+/// Core recipe model representing the database record
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Recipe {
     pub id: String,
     pub name: String,
@@ -33,23 +40,15 @@ pub fn fallback_recipe() -> Recipe {
     }
 }
 
-
-// Load all recipes from JSON file
+/// Load all recipes from a JSON file into a Vec<Recipe>
 pub fn read_recipes<P: AsRef<Path>>(recipes_path: P) -> Result<Vec<Recipe>, RecipeError> {
     let f = std::fs::File::open(recipes_path.as_ref())?;
     let recipes = serde_json::from_reader(f)?;
     Ok(recipes)
 }
 
-use std::ops::Deref;
-use std::collections::HashSet;
-use axum::response::{IntoResponse, Response};
-use axum::Json;
-use crate::AppState;
-use sqlx::SqlitePool;
-
 /// Struct for API JSON response
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
 pub struct JsonRecipe {
     id: String,
     name: String,
@@ -71,6 +70,19 @@ impl JsonRecipe {
             source: recipe.source,
         }
     }
+
+    pub fn to_recipe(&self) -> (Recipe, impl Iterator<Item = &str>) {
+        let recipe = Recipe {
+            id: self.id.clone(),
+            name: self.name.clone(),
+            ingredients: self.ingredients.clone(),
+            instructions: self.instructions.clone(),
+            tags: Some(self.tags.iter().cloned().collect()),
+            source: self.source.clone(),
+        };
+        let tags = self.tags.iter().map(String::deref);
+        (recipe, tags)
+    }
 }
 
 impl IntoResponse for JsonRecipe {
@@ -79,7 +91,7 @@ impl IntoResponse for JsonRecipe {
     }
 }
 
-/// Fetch a recipe + tags for use in API response
+/// Fetch a recipe and its tags for use in API response
 pub async fn get(db: &SqlitePool, recipe_id: &str) -> Result<(Recipe, Vec<String>), sqlx::Error> {
     let row = sqlx::query!(
         r#"
@@ -104,4 +116,15 @@ pub async fn get(db: &SqlitePool, recipe_id: &str) -> Result<(Recipe, Vec<String
     let tags = recipe.tags.clone().unwrap_or_default();
 
     Ok((recipe, tags))
+}
+
+/// Fetch a random recipe ID from the database
+pub async fn get_random(db: &SqlitePool) -> Result<String, sqlx::Error> {
+    let recipe_result = sqlx::query_scalar!(
+        "SELECT id FROM recipes ORDER BY RANDOM() LIMIT 1;"
+    )
+    .fetch_one(db)
+    .await?
+    .ok_or_else(|| sqlx::Error::RowNotFound)?; 
+    Ok(recipe_result)
 }

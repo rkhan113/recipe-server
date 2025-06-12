@@ -111,3 +111,39 @@ At this point I see a "set `DATABASE_URL` to use query macros online..." (I'm us
 
 ## Liscence 
 MIT
+
+
+---
+
+**# rest-api-start Branch**
+This branch adds a fully functional, Utoipa-documented REST API to the existing recipe server.
+
+
+
+---
+
+## Features Implemented
+
+REST API Endpoints:
+- GET /api/v1/recipe/{recipe_id}
+    Returns a recipe by its ID in JSON format
+- GET /api/v1/random-recipe
+    Returns a random recipe from the database
+
+OpenAPI Documentation (via utoipa):
+- Integrated Swagger UI (/swagger-ui)
+- Also includes Redoc (/redoc) and RapiDoc (/rapidoc)
+- Traceable Server Logging using tower-http and tracing_subscriber
+- CORS Handling for cross-origin API requests
+- Codebase Refactoring for modular api.rs route handling and documentation
+
+
+---
+
+## Known Limitations
+
+The /tagged-joke equivalent route (i.e., filtering recipes by tag) was intentionally excluded, as tag-based queries aren't yet working reliably in this version.
+
+Swagger UI required a temporary patch via a Git dependency (linked directly to the latest Utoipa commit) due to a documented upstream issue.
+
+No authentication or JWT-based API write support is implemented on this branch.

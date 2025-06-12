@@ -4,45 +4,46 @@ mod templates;
 mod web;
 mod api;
 
-use axum::{self, extract::{State, Path, Query}, response::{self, IntoResponse}, routing};
+use axum::{
+    self,
+    extract::{State},
+    http::{self, StatusCode},
+    response::{self, IntoResponse},
+    routing,
+};
 use clap::Parser;
 use sqlx::{SqlitePool, migrate::MigrateDatabase};
 use tokio::{net, sync::RwLock};
 use tower_http::{services, trace};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-use crate::error::RecipeError;
 use std::{path::PathBuf, sync::Arc};
 use recipe::*;
 use templates::*;
 use askama::Template;
 use recipe::fallback_recipe;
-use axum::http::StatusCode;
+use utoipa_rapidoc::RapiDoc;
+use utoipa_redoc::{Redoc, Servable};
+use utoipa_swagger_ui::SwaggerUi;
+use utoipa_axum::router::OpenApiRouter;
+use crate::error::RecipeError;
+use utoipa::OpenApi;
+
 
 extern crate log;
 
-
-/// Command-line arguments
 #[derive(Parser)]
 struct Args {
-    /// Optional path to JSON file to seed the database
     #[arg(short, long, name = "init-from")]
     init_from: Option<PathBuf>,
     #[arg(short, long, name = "db-uri")]
     db_uri: Option<String>,
 }
 
-/// Shared application state (just the database for now)
 struct AppState {
     db: SqlitePool,
-    current_recipe: Recipe, // Holds fallback recipe if DB query fails
-}
-/// Query parameters for selecting a recipe by ID
-#[derive(serde::Deserialize)]
-struct GetRecipeParams {
-    id: Option<String>,
+    current_recipe: Recipe,
 }
 
-/// Determine the database URI from CLI arg, env var, or default
 fn get_db_uri(db_uri: Option<&str>) -> String {
     if let Some(db_uri) = db_uri {
         db_uri.to_string()
@@ -53,7 +54,6 @@ fn get_db_uri(db_uri: Option<&str>) -> String {
     }
 }
 
-/// Extract folder path from SQLite URI
 fn extract_db_dir(db_uri: &str) -> Result<&str, RecipeError> {
     if db_uri.starts_with("sqlite://") && db_uri.ends_with(".db") {
         let start = db_uri.find(':').unwrap() + 3;
@@ -69,84 +69,6 @@ fn extract_db_dir(db_uri: &str) -> Result<&str, RecipeError> {
     }
 }
 
-/// Query the database for a recipe, by ID or random
-async fn choose_recipe(db: &SqlitePool, params: &GetRecipeParams) -> Result<Recipe, sqlx::Error> {
-    if let Some(id) = &params.id {
-        let row = sqlx::query!(
-            r#"SELECT id, name, ingredients, instructions, tags, source FROM recipes WHERE id = ?"#,
-            id
-        )
-        .fetch_one(db)
-        .await?;
-
-        Ok(Recipe {
-            id: row.id.expect("Missing id"),
-            name: row.name,
-            ingredients: serde_json::from_str(&row.ingredients).unwrap(),
-            instructions: row.instructions,
-            tags: row.tags.map(|t| serde_json::from_str(&t).unwrap()),
-            source: row.source,
-        })
-    } else {
-        let row = sqlx::query!(
-            r#"SELECT id, name, ingredients, instructions, tags, source FROM recipes ORDER BY RANDOM() LIMIT 1"#
-        )
-        .fetch_one(db)
-        .await?;
-
-        Ok(Recipe {
-            id: row.id.expect("Missing id"),
-            name: row.name,
-            ingredients: serde_json::from_str(&row.ingredients).unwrap(),
-            instructions: row.instructions,
-            tags: row.tags.map(|t| serde_json::from_str(&t).unwrap()),
-            source: row.source,
-        })
-    }
-}
-
-/// HTML route handler for displaying a recipe
-async fn get_recipe(
-    State(app_state): State<Arc<RwLock<AppState>>>,
-    Query(params): Query<GetRecipeParams>,
-) -> Result<response::Html<String>, StatusCode> {
-    let mut app_state = app_state.write().await;
-    let db = app_state.db.clone();
-
-    let recipe_result = choose_recipe(&db, &params).await;
-
-    match recipe_result {
-        Ok(row) => {
-            let recipe = Recipe {
-                id: row.id,
-                name: row.name,
-                ingredients: row.ingredients,
-                instructions: row.instructions,
-                tags: row.tags,
-                source: row.source,
-            };
-
-            let tag_list = recipe
-                .tags
-                .clone()
-                .unwrap_or_default()
-                .into_iter()
-                .collect::<Vec<String>>();
-
-            let tag_string = tag_list.join(", ");
-
-            app_state.current_recipe = recipe.clone();
-            let template = IndexTemplate::new(recipe.clone(), tag_string);
-            Ok(response::Html(template.render().unwrap()))
-        }
-        Err(e) => {
-            log::warn!("Recipe fetch failed: {}", e);
-            Err(StatusCode::NOT_FOUND)
-        }
-    }
-}
-
-/// Load recipes from a JSON file and insert them into the database
 async fn seed_db_from_file(db: &SqlitePool, path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
     let recipes = read_recipes(path)?;
 
@@ -173,7 +95,6 @@ async fn seed_db_from_file(db: &SqlitePool, path: &PathBuf) -> Result<(), Box<dy
     Ok(())
 }
 
-/// Launch the Axum server and handle CLI setup
 async fn serve() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
     let db_uri = get_db_uri(args.db_uri.as_deref());
@@ -209,11 +130,27 @@ async fn serve() -> Result<(), Box<dyn std::error::Error>> {
         .make_span_with(trace::DefaultMakeSpan::new().level(tracing::Level::INFO))
         .on_response(trace::DefaultOnResponse::new().level(tracing::Level::INFO));
 
+    let cors = tower_http::cors::CorsLayer::new()
+        .allow_methods([http::Method::GET])
+        .allow_origin(tower_http::cors::Any);
+
+    async fn handler_404() -> axum::response::Response {
+        (http::StatusCode::NOT_FOUND, "404 Not Found").into_response()
+    }
+
     let mime_favicon = "image/vnd.microsoft.icon".parse().unwrap();
+
+    let (api_router, api) = OpenApiRouter::with_openapi(api::ApiDoc::openapi())
+        .nest("/api/v1", api::router())
+        .split_for_parts();
+
+    let swagger_ui = SwaggerUi::new("/swagger-ui")
+        .url("/api-docs/openapi.json", api.clone());
+    let redoc_ui = Redoc::with_url("/redoc", api.clone());
+    let rapidoc_ui = RapiDoc::new("/api-docs/openapi.json").path("/rapidoc");
 
     let app = axum::Router::new()
         .route("/", routing::get(web::get_recipe))
-        .route("/api/v1/recipe/{recipe_id}", routing::get(api::get_recipe))
         .route_service(
             "/recipe.css",
             services::ServeFile::new_with_mime("assets/static/recipe.css", &mime::TEXT_CSS_UTF_8),
@@ -222,6 +159,12 @@ async fn serve() -> Result<(), Box<dyn std::error::Error>> {
             "/favicon.ico",
             services::ServeFile::new_with_mime("assets/static/favicon.ico", &mime_favicon),
         )
+        .merge(swagger_ui)
+        .merge(redoc_ui)
+        .merge(rapidoc_ui)
+        .merge(api_router)
+        .fallback(handler_404)
+        .layer(cors)
         .layer(trace_layer)
         .with_state(state);
 
@@ -231,7 +174,6 @@ async fn serve() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-/// Entrypoint to start the application
 #[tokio::main]
 async fn main() {
     if let Err(err) = serve().await {

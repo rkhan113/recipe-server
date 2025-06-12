@@ -4,7 +4,7 @@ mod templates;
 
 use axum::{self, extract::State, response, routing};
 use clap::Parser;
-use sqlx::SqlitePool;
+use sqlx::{SqlitePool, migrate::MigrateDatabase, sqlite};
 use tokio::{net, sync::RwLock};
 use tower_http::{services, trace};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
@@ -13,6 +13,8 @@ use std::{path::PathBuf, sync::Arc};
 use recipe::*;
 use templates::*;
 use askama::Template;
+use recipe::fallback_recipe;
+
 
 
 /// Command-line arguments
@@ -21,19 +23,49 @@ struct Args {
     /// Optional path to JSON file to seed the database
     #[arg(short, long, name = "init-from")]
     init_from: Option<PathBuf>,
+    #[arg(short, long, name = "db-uri")]
+    db_uri: Option<String>,
 }
 
 /// Shared application state (just the database for now)
 struct AppState {
     db: SqlitePool,
+    current_recipe: Recipe, // Holds fallback recipe if DB query fails
+}
+/// Determine the database URI from the following sources:
+fn get_db_uri(db_uri: Option<&str>) -> String {
+    if let Some(db_uri) = db_uri {
+        db_uri.to_string()
+    } else if let Ok(env_uri) = std::env::var("RECIPE_DB_URI") {
+        env_uri
+    } else {
+        "sqlite://db/recipe.db".to_string()
+    }
+}
+
+/// Extracts the directory path from a SQLite URI for folder creation.
+/// Returns an error if the URI isn't a valid SQLite file URI.
+fn extract_db_dir(db_uri: &str) -> Result<&str, RecipeError> {
+    if db_uri.starts_with("sqlite://") && db_uri.ends_with(".db") {
+        let start = db_uri.find(':').unwrap() + 3; // Skip past "sqlite://"
+        let mut path = &db_uri[start..];
+        if let Some(end) = path.rfind('/') {
+            path = &path[..end]; // Get folder path only
+        } else {
+            path = ""; // DB file in root
+        }
+        Ok(path)
+    } else {
+        Err(RecipeError::InvalidDbUri(db_uri.to_string()))
+    }
 }
 
 /// Route handler: fetch a random recipe and render it as HTML
 async fn get_recipe(State(app_state): State<Arc<RwLock<AppState>>>) -> response::Html<String> {
-    let app_state = app_state.read().await;
+    let mut app_state = app_state.write().await;
     let db = &app_state.db;
 
-    let row = sqlx::query!(
+    let recipe_result = sqlx::query!(
         r#"
         SELECT id, name, ingredients, instructions, tags, source 
         FROM recipes 
@@ -41,21 +73,25 @@ async fn get_recipe(State(app_state): State<Arc<RwLock<AppState>>>) -> response:
         "#
     )
     .fetch_one(db)
-    .await
-    .expect("Failed to fetch recipe");
+    .await;
 
-    let recipe = Recipe {
-        id: row.id.expect("Missing id"),
-        name: row.name,
-        ingredients: serde_json::from_str(&row.ingredients).unwrap(),
-        instructions: row.instructions,
-        tags: row.tags.map(|t: String| serde_json::from_str(&t).unwrap()),
-        source: row.source,
-    };
+    // Try to get a recipe from the DB, fallback if it fails
+    if let Ok(row) = recipe_result {
+        let recipe = Recipe {
+            id: row.id.expect("Missing id"),
+            name: row.name,
+            ingredients: serde_json::from_str(&row.ingredients).unwrap(),
+            instructions: row.instructions,
+            tags: row.tags.map(|t: String| serde_json::from_str(&t).unwrap()),
+            source: row.source,
+        };
+        app_state.current_recipe = recipe;
+    }
 
-    let template = IndexTemplate::new(&recipe);
+    let template = IndexTemplate::new(&app_state.current_recipe);
     response::Html(template.render().unwrap())
 }
+
 
 /// Seeds the database from a local JSON file
 async fn seed_db_from_file(db: &SqlitePool, path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
@@ -91,8 +127,19 @@ async fn seed_db_from_file(db: &SqlitePool, path: &PathBuf) -> Result<(), Box<dy
 async fn serve() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
 
-    // Set up the DB and run any pending migrations
-    let db = SqlitePool::connect("sqlite://db/recipe.db").await?;
+    // Get database URI (from CLI, env var, or fallback)
+    let db_uri = get_db_uri(args.db_uri.as_deref());
+
+    // If the SQLite file doesn't exist, create the necessary folder and file
+    if !sqlx::sqlite::Sqlite::database_exists(&db_uri).await? {
+        let db_dir = extract_db_dir(&db_uri)?;
+        std::fs::create_dir_all(db_dir)?; // Ensure folder exists
+        sqlx::sqlite::Sqlite::create_database(&db_uri).await?; // Create the DB file
+    }
+
+    // Now connect to the SQLite database
+    let db = SqlitePool::connect(&db_uri).await?;
+
     sqlx::migrate!().run(&db).await?;
 
     // Optionally seed the database and exit
@@ -103,7 +150,9 @@ async fn serve() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     // Shared app state
-    let state = Arc::new(RwLock::new(AppState { db }));
+    let current_recipe = fallback_recipe();
+    let app_state = AppState { db, current_recipe };
+    let state = Arc::new(RwLock::new(app_state));
 
     // Set up logging
     tracing_subscriber::registry()

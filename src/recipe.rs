@@ -40,3 +40,68 @@ pub fn read_recipes<P: AsRef<Path>>(recipes_path: P) -> Result<Vec<Recipe>, Reci
     let recipes = serde_json::from_reader(f)?;
     Ok(recipes)
 }
+
+use std::ops::Deref;
+use std::collections::HashSet;
+use axum::response::{IntoResponse, Response};
+use axum::Json;
+use crate::AppState;
+use sqlx::SqlitePool;
+
+/// Struct for API JSON response
+#[derive(Debug, Serialize, Deserialize)]
+pub struct JsonRecipe {
+    id: String,
+    name: String,
+    ingredients: Vec<String>,
+    instructions: String,
+    tags: HashSet<String>,
+    source: Option<String>,
+}
+
+impl JsonRecipe {
+    pub fn new(recipe: Recipe, tags: Vec<String>) -> Self {
+        let tag_set = tags.into_iter().collect();
+        Self {
+            id: recipe.id,
+            name: recipe.name,
+            ingredients: recipe.ingredients,
+            instructions: recipe.instructions,
+            tags: tag_set,
+            source: recipe.source,
+        }
+    }
+}
+
+impl IntoResponse for JsonRecipe {
+    fn into_response(self) -> Response {
+        (axum::http::StatusCode::OK, Json(self)).into_response()
+    }
+}
+
+/// Fetch a recipe + tags for use in API response
+pub async fn get(db: &SqlitePool, recipe_id: &str) -> Result<(Recipe, Vec<String>), sqlx::Error> {
+    let row = sqlx::query!(
+        r#"
+        SELECT id, name, ingredients, instructions, tags, source
+        FROM recipes
+        WHERE id = ?
+        "#,
+        recipe_id
+    )
+    .fetch_one(db)
+    .await?;
+
+    let recipe = Recipe {
+        id: row.id.expect("Missing id"),
+        name: row.name,
+        ingredients: serde_json::from_str(&row.ingredients).unwrap(),
+        instructions: row.instructions,
+        tags: row.tags.clone().map(|t| serde_json::from_str(&t).unwrap()),
+        source: row.source,
+    };
+
+    let tags = recipe.tags.clone().unwrap_or_default();
+
+    Ok((recipe, tags))
+}

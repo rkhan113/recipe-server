@@ -1,18 +1,21 @@
 // recipes.rs
 
 use std::path::Path;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use crate::RecipeError;
 // use once_cell::sync::Lazy;
 
-#[derive(Deserialize)]
+
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Recipe {
+    pub id: String,
     pub name: String,
     pub ingredients: Vec<String>,
     pub instructions: String,
     pub tags: Option<Vec<String>>,
     pub source: Option<String>,
 }
+
 /*
 // Keeping a hardcoded recipe for fallback/testing
 // lazy-initialized (nothing else was working)

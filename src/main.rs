@@ -1,14 +1,12 @@
-// Bring in required crates
-// use axum::{self, response, routing};
-// use tokio::net;
-use axum::{self, extract::State, response, routing};
-extern crate fastrand;
-use tokio::{net, sync::RwLock};
-use tower_http::{services, trace};
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-use askama::Template; // Import Askama's Template trait to enable render() method (was getting a warning before)
+// Bring in required crates and local modules
+use axum::{self, extract::State, response, routing}; // Axum web framework
+use clap::Parser; // CLI parsing
+use sqlx::SqlitePool; // Database connection pool
+use tokio::{net, sync::RwLock}; // Async runtime and synchronization
+use tower_http::{services, trace}; // HTTP tracing and static file serving
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt}; // Logging
+use askama::Template; // Template rendering for HTML
 
-// Bring in our local modules
 mod error;
 mod recipe;
 mod templates;
@@ -18,48 +16,133 @@ use recipe::*;
 use templates::*;
 
 use std::sync::Arc;
+use std::path::PathBuf;
 
-struct AppState {
-    recipes: Vec<Recipe>,
+/// CLI arguments
+#[derive(Parser)]
+struct Args {
+    /// Optional JSON file to initialize the database from
+    #[arg(short, long, name = "init-from")]
+    init_from: Option<PathBuf>,
 }
 
-// GET /random
+/// Application shared state (holds the database pool)
+struct AppState {
+    db: SqlitePool,
+}
+
+/// HTTP GET handler for `/`
+/// Returns a random recipe rendered as HTML.
 async fn get_recipe(State(app_state): State<Arc<RwLock<AppState>>>) -> response::Html<String> {
     let app_state = app_state.read().await;
-    let nrecipes = app_state.recipes.len();
-    let i = fastrand::usize(0..nrecipes);
-    let recipe = &app_state.recipes[i];
+    let db = &app_state.db;
 
-    let template = IndexTemplate::new(recipe);
+    // NOTE: Manually fetch row and convert fields for `Vec<String>`
+    let row = sqlx::query!(
+        r#"
+        SELECT id, name, ingredients, instructions, tags, source 
+        FROM recipes 
+        ORDER BY RANDOM() LIMIT 1;
+        "#
+    )
+    .fetch_one(db)
+    .await
+    .expect("Failed to fetch recipe");
+
+    // NOTE: Parse JSON fields into Vec<String> for ingredients and tags
+    let recipe = Recipe {
+        id: row.id.expect("Expected non-null id"),
+        name: row.name,
+        ingredients: serde_json::from_str(&row.ingredients).unwrap(),
+        instructions: row.instructions,
+        tags: row
+            .tags
+            .map(|t| serde_json::from_str(&t).unwrap()),
+        source: row.source,
+    };
+
+    // Render HTML template
+    let template = templates::IndexTemplate::new(&recipe);
     response::Html(template.render().unwrap())
 }
 
 
-// Main server setup
+/// Reads the JSON file and seeds the database with recipes.
+/// Inserts each recipe, serializing ingredients and tags as JSON strings.
+async fn seed_db_from_file(db: &SqlitePool, path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
+    let recipes = read_recipes(path)?;
+
+    let mut tx = db.begin().await?;
+    for r in &recipes {
+        let ingredients_json = serde_json::to_string(&r.ingredients)?;
+        let tags_json = r
+            .tags
+            .as_ref()
+            .map(|tags| serde_json::to_string(tags))
+            .transpose()?; // tags_json: Option<String>
+
+        sqlx::query!(
+            r#"
+            INSERT INTO recipes (id, name, ingredients, instructions, tags, source)
+            VALUES (?, ?, ?, ?, ?, ?)
+            "#,
+            r.id,
+            r.name,
+            ingredients_json,
+            r.instructions,
+            tags_json,
+            r.source,
+        )
+
+        .execute(&mut *tx)
+        .await?;
+    }
+    tx.commit().await?;
+    println!("Seeded {} recipes from {:?}", recipes.len(), path);
+    Ok(())
+}
+
+/// Main server setup and run
 async fn serve() -> Result<(), Box<dyn std::error::Error>> {
-    let recipes = read_recipes("assets/static/recipes.json")?;
-    let state = Arc::new(RwLock::new(AppState{recipes}));
-    
+    // Parse CLI arguments
+    let args = Args::parse();
+
+    // Connect to the SQLite database and run migrations
+    let db = SqlitePool::connect("sqlite://db/recipe.db").await?;
+    sqlx::migrate!().run(&db).await?;
+
+    // If `--init-from` provided, seed the database and exit immediately
+    if let Some(path) = args.init_from {
+        seed_db_from_file(&db, &path).await?;
+        println!("Database seeded successfully. Exiting.");
+        std::process::exit(0);
+    }
+
+    // Create shared application state
+    let state = Arc::new(RwLock::new(AppState { db }));
+
     // Initialize structured logging and HTTP tracing for Axum with environment-based filtering.
-     tracing_subscriber::registry()
+    tracing_subscriber::registry()
         .with(
             tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| "kk2=debug,info".into()),
+                .unwrap_or_else(|_| "recipe-server=debug,info".into()),
         )
         .with(tracing_subscriber::fmt::layer())
         .init();
-    // https://carlosmv.hashnode.dev/adding-logging-and-tracing-to-an-axum-app-rust
+
+    // Configure tracing layer to log request/response info
     let trace_layer = trace::TraceLayer::new_for_http()
         .make_span_with(trace::DefaultMakeSpan::new().level(tracing::Level::INFO))
         .on_response(trace::DefaultOnResponse::new().level(tracing::Level::INFO));
-    
-    // Define MIME type for favicon (.ico file)
+
+    // MIME type for favicon.ico
     let mime_favicon = "image/vnd.microsoft.icon".parse().unwrap();
-    
-    // Create the router
+
+    // Build Axum router with routes and middleware
     let app = axum::Router::new()
-        .route("/", routing::get(get_recipe)) // Route for the index page
-        // Serve static CSS file (must match file path & MIME)
+        // Route to get a random recipe
+        .route("/", routing::get(get_recipe))
+        // Serve CSS static file with correct MIME type
         .route_service(
             "/recipe.css",
             services::ServeFile::new_with_mime(
@@ -67,28 +150,29 @@ async fn serve() -> Result<(), Box<dyn std::error::Error>> {
                 &mime::TEXT_CSS_UTF_8,
             ),
         )
-        // Serve favicon (browser requests this at /favicon.ico)        
+        // Serve favicon.ico static file
         .route_service(
             "/favicon.ico",
-            services::ServeFile::new_with_mime(
-                "assets/static/favicon.ico",
-                &mime_favicon,
-            ),
+            services::ServeFile::new_with_mime("assets/static/favicon.ico", &mime_favicon),
         )
-    .layer(trace_layer)
-    .with_state(state);
+        // Add HTTP tracing middleware
+        .layer(trace_layer)
+        // Attach shared app state
+        .with_state(state);
 
-    // Bind to localhost on port 3000
+    // Bind server to localhost:3000
     let listener = net::TcpListener::bind("127.0.0.1:3000").await?;
-    // Start the server
+
+    // Run the server
     axum::serve(listener, app).await?;
+
     Ok(())
 }
 
-// Entry point of the app
+/// Program entry point
 #[tokio::main]
 async fn main() {
-    // If serve() returns an error, log and exit
+    // Run the server, exit with error message if it fails
     if let Err(err) = serve().await {
         eprintln!("Error: {}", err);
         std::process::exit(1);

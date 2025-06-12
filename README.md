@@ -70,17 +70,29 @@ Open your browser at http://127.0.0.1:3000 to see a random recipe.
 
 ## Project Structure
 
-src/
-├── main.rs           - App entry point, routing, state
-├── recipe.rs         - Recipe model & JSON loader
-├── templates.rs      - Askama template data structs
-├── error.rs          - Custom error types
-assets/
-├── static/
-│   ├── recipe.css    - App styling
-│   └── recipes.json  - Initial data source
-migrations/
-└── 0001...sql        - Database schema definition
+src/main.rs           
+- App entry point, routing, state
+
+src/recipe.rs         
+- Recipe model & JSON loader
+
+src/templates.rs      
+- Askama template data structs
+
+src/error.rs          
+- Custom error types
+
+assets/static/recipe.css    
+- App styling
+
+assets/static/recipes.json  
+- Initial data source
+
+assets/templates/index.html 
+- Basic html templating for Askama
+
+migrations/0001...sql        
+- Database schema definition
 
 
 ---

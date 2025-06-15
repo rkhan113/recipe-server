@@ -115,8 +115,15 @@ MIT
 
 ---
 
+## Development Environment
+- OS Name: Microsoft Windows 11 (10.0.26100 N/A Build 26100)
+- Rust: rustc 1.86.0 (05f9846f8 2025-03-31)
+- Toolchain: stable-x86_64-pc-windows-msvc (default)
+
+---
+
 **# rest-api-start Branch**
-This branch adds a fully functional, Utoipa-documented REST API to the existing recipe server.
+This branch adds a fully functional, Utoipa-documented REST API to the existing recipe server. It is now merged with main, so everything described below is reflected in the main branch. The original early stop version has been saved in a third branch. 
 
 
 
